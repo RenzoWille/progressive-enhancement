@@ -1,42 +1,190 @@
 <!doctype html>
 <html lang="nl">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Carrousel / Progressive Enhancement / FDND</title>
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-		<link href="assets/styles.css" rel="stylesheet">
-		<style>
-			/* Hint: welk layout model is handig om content naast elkaar te zetten? */
-		</style>
-		<script type="module">
-			/* Schrijf hier eventueel je client-side JavaScript */
-		</script>
-	</head>
-	<body>
-		<h1>Carrousel</h1>
 
-		<!-- Content: 
-		
-		“Websites leren bouwen, én praktijkervaring opdoen?”
-		
-		“FDND is de enige HBO-opleiding voor Frontend Development in Nederland, in twee jaar stomen wij jou klaar voor het werkveld”
-		
-		“Je werkt bij ons aan échte projecten voor échte opdrachtgevers”
-		
-		“In het studiomodel werken studenten onder begeleiding van coaches en experts uit het vakgebied aan praktijkgerichte opdrachten”
-		
-		“Bij FDND leer je websites bouwen en andere belangrijke skills die jij in de praktijk toe kan passen”
-		
-		“Een Associate degree-opleiding is een tweejarige hbo-opleiding op niveau 5”
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Carrousel / Progressive Enhancement / FDND</title>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+		rel="stylesheet">
+	<link href="assets/styles.css" rel="stylesheet">
+	<style>
+		/* Hint: welk layout model is handig om content naast elkaar te zetten? */
+		div {
+			display: flex;
+			overflow: auto;
+			scroll-snap-type: x mandatory;
+			scroll-behavior: smooth;
+			scrollbar-width: none;
+		}
 
-		-->
+		article {
+			scroll-snap-align: center;
+		}
 
-		<details open>
-			<summary>Demo video</summary>
-			<video src="assets/carrousel.mp4" width="1298" height="469" controls muted loop>
-				<a href="assets/carrousel.mp4">assets/carrousel.mp4</a>
-			</video>
-		</details>
-	</body>
+		body {
+			--purple: #A675F5;
+			--blue: #050542;
+			--blue-50: rgba(5, 5, 66, 0.5);
+			--green: #66E5BF;
+			--yellow: #FFFC86;
+		}
+
+		article {
+			--color: var(--purple);
+			background: var(--color);
+		}
+
+		article:nth-of-type(3n + 1) {
+			--color: var(--purple);
+		}
+
+		article:nth-of-type(3n + 2) {
+			--color: var(--yellow);
+		}
+
+		article:nth-of-type(3n + 3) {
+			--color: var(--green);
+		}
+
+		body {
+			font-family: 'Open Sans', sans-serif;
+			line-height: 1.6;
+		}
+
+		h1 {
+			margin: 0;
+			letter-spacing: -0.05em;
+		}
+
+		:focus-visible {
+			outline: 3px solid var(--blue);
+			outline-offset: 3px;
+		}
+
+		article {
+			padding: 3rem 2rem;
+			display: grid;
+			place-content: center;
+			flex: 85vw 1 0;
+		}
+
+		blockquote,
+		p {
+			margin: 0;
+			line-height: 1.6;
+			text-align: center;
+			font-weight: 800;
+			font-style: italic;
+			font-size: calc(3rem + .5vw);
+		}
+
+		a {
+			color: inherit;
+
+			&:hover,
+			&:focus {
+				text-decoration: none;
+			}
+		}
+
+		button {
+			position: sticky;
+			margin-top: auto;
+			margin-bottom: 1em;
+			height: 3em;
+			min-width: 8em;
+			padding: .3em .6em;
+			border: 1px solid transparent;
+			border-radius: .5rem;
+			font-family: inherit;
+			font-size: inherit;
+			text-decoration: none;
+			color: var(--green);
+			background: var(--blue);
+			cursor: pointer;
+		}
+
+		button:first-of-type {
+			margin-right: -8em;
+			left: 1em;
+		}
+
+		button:last-of-type {
+			right: 1em;
+			margin-left: -8em;
+		}
+	</style>
+	<script type="module">
+		/* Schrijf hier eventueel je client-side JavaScript */
+
+		document.querySelector('button:first-of-type').hidden = false;
+
+		document.querySelector('button:first-of-type').addEventListener('click', function () {
+			this.parentNode.scrollBy({
+				left: -1 * this.parentNode.offsetWidth
+			});
+		});
+
+		document.querySelector('button:last-of-type').hidden = false;
+
+		document.querySelector('button:last-of-type').addEventListener('click', function () {
+			this.parentNode.scrollBy({
+				left: this.parentNode.offsetWidth
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<h1>Carrousel</h1>
+
+	<div>
+		<button type="button" hidden>Vorige</button>
+
+		<article>
+			<blockquote>“Websites leren bouwen, én praktijkervaring opdoen?”</blockquote>
+		</article>
+
+		<article>
+			<blockquote>“FDND is de enige HBO-opleiding voor Frontend Development in Nederland, in twee jaar stomen wij
+				jou klaar voor het werkveld”</blockquote>
+		</article>
+
+		<article>
+			<blockquote>“Je werkt bij ons aan échte projecten voor échte opdrachtgevers”</blockquote>
+		</article>
+
+		<article>
+			<blockquote>“In het studiomodel werken studenten onder begeleiding van coaches en experts uit het vakgebied
+				aan praktijkgerichte opdrachten”</blockquote>
+		</article>
+
+		<article>
+			<blockquote>“Bij FDND leer je websites bouwen en andere belangrijke skills die jij in de praktijk toe kan
+				passen”</blockquote>
+		</article>
+
+		<article>
+			<blockquote>“Een Associate degree-opleiding is een tweejarige hbo-opleiding op niveau 5”</blockquote>
+		</article>
+
+		<button type="button" hidden>Volgende</button>
+
+	</div>
+
+
+	<!-- Content: -->
+
+
+
+
+	<details open>
+		<summary>Demo video</summary>
+		<video src="assets/carrousel.mp4" width="1298" height="469" controls muted loop>
+			<a href="assets/carrousel.mp4">assets/carrousel.mp4</a>
+		</video>
+	</details>
+</body>
+
 </html>
