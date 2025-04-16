@@ -1,30 +1,74 @@
 <!doctype html>
 <html lang="nl">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Switch control / Progressive Enhancement / FDND</title>
-		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-		<link href="assets/styles.css" rel="stylesheet">
-		<style>
-			/* Schrijf hier gewoon je CSS voor dit component */
 
-			/* Hint: Dit component kun je volledig met HTML en CSS bouwen */
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Switch control / Progressive Enhancement / FDND</title>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+		rel="stylesheet">
+	<link href="assets/styles.css" rel="stylesheet">
+	<style>
 
-			/* Hint: Hoe ver ga je qua styling? Vraag jezelf dit altijd af */
-		</style>
-	</head>
-	<body>
-		<h1>Switch control</h1>
-		
-		<!-- Hint: Safari heeft hiervoor iets bedacht, maar is dat al een standaard?
+		#toggle {
+			display: none;
+		}
+		.switch {
+			display: inline-block;
+			width: 80px;
+			height: 36px;
+			background-color: #ccc;
+			border-radius: 26px;
+			position: relative;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		.switch::before {
+			content: "";
+			position: absolute;
+			width: 32px;
+			height: 32px;
+			background-color: white;
+			border-radius: 50%;
+			top: 2px;
+			left: 3px;
+			transition: transform 0.3s;
+		}
+
+		#toggle:checked + .switch {
+			background-color: #4caf50;
+		}
+
+		#toggle:checked + .switch::before {
+			transform: translateX(42px);
+		}
+
+		/* Schrijf hier gewoon je CSS voor dit component */
+
+		/* Hint: Dit component kun je volledig met HTML en CSS bouwen */
+
+		/* Hint: Hoe ver ga je qua styling? Vraag jezelf dit altijd af */
+	</style>
+</head>
+
+<body>
+	<h1>Switch control</h1>
+
+	<label>
+		<input type="checkbox" id="toggle">
+		<span class="switch"></span>
+	</label>
+
+	<!-- Hint: Safari heeft hiervoor iets bedacht, maar is dat al een standaard?
 		     Wat gebeurt er in browsers die dat nog niet ondersteunen? -->
 
-		<details open>
-			<summary>Demo video</summary>
-			<video src="assets/switch.mp4" width="119" height="67" controls muted autoplay loop>
-				<a href="assets/switch.mp4">assets/switch.mp4</a>
-			</video>
-		</details>
-	</body>
+	<details open>
+		<summary>Demo video</summary>
+		<video src="assets/switch.mp4" width="119" height="67" controls muted autoplay loop>
+			<a href="assets/switch.mp4">assets/switch.mp4</a>
+		</video>
+	</details>
+</body>
+
 </html>
