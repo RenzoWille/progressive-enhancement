@@ -11,11 +11,18 @@
 	<style>
 
 		#toggle {
-			display: none;
+			appearance: none;
+			position: absolute;
+			inset: 0;
+			border-radius: inherit;
 		}
+
 		.switch {
+			--switch-width: 80px;
+			--thumb-width: 32px;
+			--switch-padding: 3px;
 			display: inline-block;
-			width: 80px;
+			width: var(--switch-width);
 			height: 36px;
 			background-color: #ccc;
 			border-radius: 26px;
@@ -27,21 +34,26 @@
 		.switch::before {
 			content: "";
 			position: absolute;
-			width: 32px;
-			height: 32px;
+			width: var(--thumb-width);
+			height: var(--thumb-width);
 			background-color: white;
 			border-radius: 50%;
 			top: 2px;
-			left: 3px;
+			left: var(--switch-padding);
 			transition: transform 0.3s;
 		}
 
-		#toggle:checked + .switch {
+		.switch:has(#toggle:checked) {
 			background-color: #4caf50;
 		}
 
-		#toggle:checked + .switch::before {
-			transform: translateX(42px);
+		.switch:has(#toggle:checked)::before {
+			content: "aan";
+			display: grid;
+			place-items: center;
+			font-size: calc(var(--thumb-width) * .33);
+			font-weight: bold;
+			transform: translateX(calc(var(--switch-width) - var(--thumb-width) - var(--switch-padding) * 2));
 		}
 
 		/* Schrijf hier gewoon je CSS voor dit component */
@@ -55,9 +67,8 @@
 <body>
 	<h1>Switch control</h1>
 
-	<label>
+	<label aria-label="toggle-switch" class="switch">
 		<input type="checkbox" id="toggle">
-		<span class="switch"></span>
 	</label>
 
 	<!-- Hint: Safari heeft hiervoor iets bedacht, maar is dat al een standaard?
